@@ -22,7 +22,11 @@ module.exports = function (app) {
         res.json("../public/assets/js/index.js");
     });
 
-    app.get("/api/index", function (req, res) {
+    app.post("/api/index", function (req, res) {
+        res.json("../public/assets/js/index.js");
+    });
+
+    app.delete("/api/index", function (req, res) {
         res.json("../public/assets/js/index.js");
     });
 
