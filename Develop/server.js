@@ -1,6 +1,6 @@
 const express = require("express");
-const path = require("path");
-const fs = require("fs");
+const apiRoutes = require("./routes/apiRoutes");
+const htmlRoutes = require("./routes/htmlRoutes");
 
 const app = express();
 
@@ -14,37 +14,10 @@ app.use(express.urlencoded({
 app.use(express.json());
 
 app.use(express.static("public"));
+app.use("/api", apiRoutes)
+app.use("/", htmlRoutes)
 
-// API Routes
-module.exports = function (app) {
+app.listen(PORT, () => {
+    console.log(`Listening on Port ${PORT}`);
 
-    app.get("/api/index", function (req, res) {
-        res.json("../public/assets/js/index.js");
-    });
-
-    app.post("/api/index", function (req, res) {
-        res.json("../public/assets/js/index.js");
-    });
-
-    app.delete("/api/index", function (req, res) {
-        res.json("../public/assets/js/index.js");
-    });
-
-
-};
-// HTML Routes
-module.exports = function (app) {
-
-    app.get("/notes", function (req, res) {
-        res.sendFile(path.join(__dirname, "../public/notes.html"));
-    });
-
-    app.get("*", function (req, res) {
-        res.sendFile(path.join(__dirname, "../public/index.html"));
-    });
-
-    app.listen(PORT, () => {
-        console.log(`Listening on Port ${PORT}`);
-
-    });
-};
+});
